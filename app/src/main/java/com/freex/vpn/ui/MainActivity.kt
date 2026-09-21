@@ -3,7 +3,6 @@ package com.freex.vpn.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PowerSettingsNew
@@ -17,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.freex.vpn.FreeXVpnApplication
 import com.freex.vpn.domain.model.ConnectionState
-import com.freex.vpn.ui.theme.Theme
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -28,7 +26,7 @@ class MainActivity : ComponentActivity() {
         val vpnRepo = app.container.vpnRepository
 
         setContent {
-            Theme {
+            MaterialTheme {
                 val snapshot by vpnRepo.snapshot.collectAsState()
                 val scope = rememberCoroutineScope()
 
