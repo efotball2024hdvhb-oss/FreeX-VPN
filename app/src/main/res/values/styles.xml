@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.SMSForwarder" parent="android:style/Theme.Material.NoActionBar">
+    <style name="Theme.FreeX" parent="android:style/Theme.Material.NoActionBar">
         <item name="android:fontFamily">sans</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:statusBarColor">#080A0F</item>
-        <item name="android:navigationBarColor">#080A0F</item>
+        <item name="android:statusBarColor">@color/freex_black</item>
+        <item name="android:navigationBarColor">@color/freex_black</item>
         <item name="android:windowActionModeOverlay">true</item>
     </style>
 </resources>

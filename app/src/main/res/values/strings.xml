@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">FreeX VPN</string>
+    <string name="notification_channel_name">VPN connection</string>
+    <string name="notification_connected">FreeX VPN is connected</string>
+    <string name="notification_disconnected">FreeX VPN is disconnected</string>
+</resources>
