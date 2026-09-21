@@ -1,22 +1,7 @@
-# SMS Forwarder
+# SMS Forwarder 3.0
 
-Real Android/Kotlin project for user-authorized SMS reception, local message history, background delivery, and secure email forwarding through a backend.
+A dark, iPhone-inspired Android SMS inbox with automatic forwarding through an HTTPS backend.
 
-## Android
-- Kotlin + Jetpack Compose + Material 3
-- First-launch SMS permission request
-- Receives SMS with BroadcastReceiver
-- Stores up to 200 recent messages locally
-- Shows real received messages in the app
-- WorkManager queues background email delivery and marks successfully delivered messages
-- Configurable destination email and backend URL
-- No SMTP credentials inside the APK
+Build target: JDK 17, Gradle 8.13, Android SDK 36.
 
-## Backend
-`backend/server.py` provides `/v1/forward` and sends mail using server-side SMTP environment variables.
-
-## Security
-Run the backend behind HTTPS and configure authentication before exposing it to the internet. Never commit passwords, SMTP credentials, or tokens.
-
-## Important
-Only process SMS on a device where the owner has explicitly authorized the application. Review current Google Play SMS permission and distribution requirements before publishing.
+Never commit SMTP passwords or API tokens.
