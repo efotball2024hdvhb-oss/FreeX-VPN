@@ -20,8 +20,8 @@ class SettingsStore(private val context: Context) {
     val autoSelect: Flow<Boolean> = context.dataStore.data.map { it[KEY_AUTO_SELECT] ?: false }
     val reconnect: Flow<Boolean> = context.dataStore.data.map { it[KEY_RECONNECT] ?: false }
     val selectedServer: Flow<String?> = context.dataStore.data.map { it[KEY_SELECTED_SERVER] }
-    val favorites: Flow<Set<String>> = context.dataStore.data.map { it[KEY_FAVORITES] ?: emptySet() }
-    val recent: Flow<Set<String>> = context.dataStore.data.map { it[KEY_RECENT] ?: emptySet() }
+    val favorites: Flow<List<String>> = context.dataStore.data.map { (it[KEY_FAVORITES] ?: emptySet()).toList() }
+    val recent: Flow<List<String>> = context.dataStore.data.map { (it[KEY_RECENT] ?: emptySet()).toList() }
 
     suspend fun setAutoConnect(enabled: Boolean) {
         context.dataStore.edit { it[KEY_AUTO_CONNECT] = enabled }
