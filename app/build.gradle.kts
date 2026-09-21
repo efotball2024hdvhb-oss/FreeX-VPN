@@ -12,13 +12,17 @@ android {
         applicationId = "com.smsforwarder"
         minSdk = 26
         targetSdk = 36
-        versionCode = 3
-        versionName = "3.0.0"
+        versionCode = 4
+        versionName = "4.0.0"
     }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        compose = true
     }
 }
 
