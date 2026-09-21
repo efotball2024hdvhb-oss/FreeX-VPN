@@ -100,7 +100,7 @@ private fun SmsForwarderTheme(content: @Composable () -> Unit) {
             bodyLarge = LocalTextStyle.current.copy(fontSize = 15.sp),
             bodyMedium = LocalTextStyle.current.copy(fontSize = 13.sp)
         ),
-        content = content
+        content = { Column(content = content) }
     )
 }
 
@@ -378,7 +378,7 @@ private fun StatusLine(
     active: Boolean
 ) {
     Row(
-        Modifier.weight(1f),
+        Modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
@@ -541,7 +541,7 @@ private fun SmsCard(sms: SmsItem) {
                         color = TextPrimary,
                         fontWeight = FontWeight.SemiBold,
                         fontSize = 15.sp,
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -785,7 +785,7 @@ private fun SettingsGroup(
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier.padding(start = 4.dp, bottom = 8.dp)
         )
-        GlassCard(Modifier.fillMaxWidth(), RoundedCornerShape(22.dp), content = content)
+        GlassCard(Modifier.fillMaxWidth(), RoundedCornerShape(22.dp), content = { Column(content = content) })
     }
 }
 
@@ -805,7 +805,7 @@ private fun GlassCard(
         color = SurfaceGlass,
         tonalElevation = 0.dp,
         shadowElevation = 7.dp,
-        content = content
+        content = { Column(content = content) }
     )
 }
 
