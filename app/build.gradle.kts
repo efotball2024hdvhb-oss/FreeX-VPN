@@ -14,6 +14,8 @@ android {
         versionCode = 1
         versionName = "1.0.0"
 
+        buildConfigField("String", "API_BASE_URL", "\"https://api.freex.vpn/\"")
+        buildConfigField("String", "FALLBACK_HOST", "\"freex.vpn\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -35,6 +37,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -46,6 +49,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.5")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.5")
     implementation("androidx.activity:activity-compose:1.9.2")
+    implementation("androidx.navigation:navigation-compose:2.8.1")
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
 
     // Jetpack Compose UI
     implementation("androidx.compose.ui:ui")

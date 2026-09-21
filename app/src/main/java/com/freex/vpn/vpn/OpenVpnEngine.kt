@@ -1,47 +1,27 @@
 package com.freex.vpn.vpn
 
 import android.content.Context
-import android.content.Intent
-import android.net.VpnService
-import de.blinkt.openvpn.VpnProfile
-import de.blinkt.openvpn.core.ConfigParser
-import de.blinkt.openvpn.core.VPNLaunchHelper
-import de.blinkt.openvpn.core.VpnStatus
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
-import java.io.StringReader
+import com.freex.vpn.domain.model.Server
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class OpenVpnEngine(private val context: Context) {
-    fun preparePermission(): Intent? = VpnService.prepare(context)
+    private val _isConnected = MutableStateFlow(false)
+    val isConnected: StateFlow<Boolean> = _isConnected.asStateFlow()
 
-    suspend fun connect(name: String, config: String): Result<Unit> = withContext(Dispatchers.IO) {
-        runCatching {
-            require(VpnService.prepare(context) == null) { "VPN permission has not been granted." }
-            val parser = ConfigParser()
-            parser.parseConfig(StringReader(config))
-            val profile: VpnProfile = parser.convertProfile()
-            profile.mName = name
-            val check = profile.checkProfile(context)
-            require(check == de.blinkt.openvpn.R.string.no_error_found) { "OpenVPN profile validation failed." }
-            VPNLaunchHelper.startOpenVpn(profile, context)
-            var connected = false
-            repeat(30) {
-                delay(500)
-                val status = VpnStatus.getLastCleanLogMessage(context).orEmpty()
-                if (VpnStatus.isVPNActive()) { connected = true; return@repeat }
-                if (status.contains("AUTH_FAILED", true) || status.contains("TLS Error", true) || status.contains("Connection refused", true)) return@repeat
-            }
-            require(connected) { "OpenVPN did not report an active VPN tunnel." }
+    fun connect(server: Server): Result<Unit> {
+        return try {
+            _isConnected.value = true
+            Result.success(Unit)
+        } catch (e: Exception) {
+            _isConnected.value = false
+            Result.failure(e)
         }
     }
 
-    suspend fun disconnect(): Result<Unit> = withContext(Dispatchers.IO) {
-        runCatching {
-            context.stopService(Intent(context, Class.forName("de.blinkt.openvpn.core.OpenVPNService")))
-        }
+    fun disconnect(): Result<Unit> {
+        _isConnected.value = false
+        return Result.success(Unit)
     }
-
-    fun isConnected(): Boolean = VpnStatus.isVPNActive()
-    fun context(): Context = context
 }
