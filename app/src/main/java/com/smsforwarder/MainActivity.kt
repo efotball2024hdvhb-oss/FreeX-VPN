@@ -805,7 +805,7 @@ private fun GlassCard(
         color = SurfaceGlass,
         tonalElevation = 0.dp,
         shadowElevation = 7.dp,
-        content = content
+        content = { Column { content() } }
     )
 }
 
