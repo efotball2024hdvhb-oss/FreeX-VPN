@@ -100,7 +100,7 @@ private fun SmsForwarderTheme(content: @Composable () -> Unit) {
             bodyLarge = LocalTextStyle.current.copy(fontSize = 15.sp),
             bodyMedium = LocalTextStyle.current.copy(fontSize = 13.sp)
         ),
-        content = { Column(content = content) }
+        content = { Column(content = { Column(content = content) }) }
     )
 }
 
@@ -785,7 +785,7 @@ private fun SettingsGroup(
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier.padding(start = 4.dp, bottom = 8.dp)
         )
-        GlassCard(Modifier.fillMaxWidth(), RoundedCornerShape(22.dp), content = { Column(content = content) })
+        GlassCard(Modifier.fillMaxWidth(), RoundedCornerShape(22.dp), content = { Column(content = { Column(content = content) }) })
     }
 }
 
@@ -805,7 +805,7 @@ private fun GlassCard(
         color = SurfaceGlass,
         tonalElevation = 0.dp,
         shadowElevation = 7.dp,
-        content = { Column(content = content) }
+        content = { Column(content = { Column(content = content) }) }
     )
 }
 
