@@ -10,8 +10,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url = uri("https://jitpack.io") }
+        maven { url = java.net.URI("https://jitpack.io") }
     }
 }
-rootProject.name = "FreeXVPN"
+
+rootProject.name = "FreeX-VPN"
 include(":app")
